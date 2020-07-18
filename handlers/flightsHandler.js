@@ -1,7 +1,7 @@
 const { flights } = require("../test-data/flightSeating");
 const { reservation } = require("../test-data/reservations");
 
-const handleFlights = (req, res) => {
+const handleFlight = (req, res) => {
   const id = req.params.id.toUpperCase();
 
   const getFlightById = (id) => {
@@ -18,4 +18,8 @@ const handleFlights = (req, res) => {
   }
 };
 
-module.exports = { handleFlights };
+const handleFlights = (req, res) => {
+  res.status(200).send(flights);
+};
+
+module.exports = { handleFlight, handleFlights };

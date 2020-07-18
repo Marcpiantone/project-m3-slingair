@@ -1,5 +1,6 @@
 const { flights } = require("../test-data/flightSeating");
-const { reservation } = require("../test-data/reservations");
+const { reservations } = require("../test-data/reservations");
+const { v4: uuidv4 } = require("uuid");
 
 const handleSeats = (req, res) => {
   res.status(200).send("OK");

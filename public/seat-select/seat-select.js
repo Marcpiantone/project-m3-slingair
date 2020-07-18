@@ -4,10 +4,29 @@ const confirmButton = document.getElementById("confirm-button");
 
 let selection = "";
 
+const renderFlights = (data) => {
+  const flightsIds = Object.keys(data);
+
+  flightsIds.forEach((flight) => {
+    const option = document.createElement("option");
+    option.innerText = flight;
+    flightInput.appendChild(option);
+  });
+};
+
+const getFlights = () => {
+  fetch(`/flights`)
+    .then((res) => res.json())
+    .then((data) => renderFlights(data));
+};
+
+getFlights();
+
 const renderSeats = (data) => {
   seatsDiv.innerHTML = "";
   document.querySelector(".form-container").style.display = "block";
   const alpha = ["A", "B", "C", "D", "E", "F"];
+
   // Maybe make alpha a var based on data ?
   const rowNumber = data.length / 6;
 
@@ -60,37 +79,45 @@ const renderSeats = (data) => {
   });
 };
 
-const toggleFormContent = (event) => {
-  console.log(event);
-  event.preventDefault();
-  const flightNumber = flightInput.value;
+const toggleFormContent = () => {
+  const flightNumber = flightInput.options[flightInput.selectedIndex].value;
   console.log("toggleFormContent: ", flightNumber);
-  fetch(`/flights/${flightNumber}`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      renderSeats(data);
-    });
-  // TODO: contact the server to get the seating availability
-  //      - only contact the server if the flight number is this format 'SA###'.
-  //      - Do I need to create an error message if the number is not valid?
 
-  // TODO: Pass the response data to renderSeats to create the appropriate seat-type.
+  if (flightNumber != 0) {
+    fetch(`/flights/${flightNumber}`)
+      .then((res) => res.json())
+      .then((data) => {
+        renderSeats(data);
+      });
+  }
 };
 
 const handleConfirmSeat = (event) => {
   event.preventDefault();
-  // TODO: everything in here!
+
+  let reservationId = "";
+
   fetch("/users", {
     method: "POST",
     body: JSON.stringify({
       givenName: document.getElementById("givenName").value,
+      surname: document.getElementById("surname").value,
+      email: document.getElementById("email").value,
+      seat: selection,
+      flight: flightInput.value,
     }),
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-  });
+  })
+    .then((res) => res.json())
+    .then((data1) => {
+      reservationId = data1.data.id;
+      window.location.assign(
+        `http://localhost:8000/view-reservation?reservationId=${reservationId}`
+      );
+    });
 };
 
-flightInput.addEventListener("blur", toggleFormContent);
+flightInput.addEventListener("change", toggleFormContent);

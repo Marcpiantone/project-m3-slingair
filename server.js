@@ -5,7 +5,13 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const { flights } = require("./test-data/flightSeating");
 const { handleSeats } = require("./handlers/seatsHandler");
-const { handleFlights } = require("./handlers/flightsHandler");
+const { handleFlight, handleFlights } = require("./handlers/flightsHandler");
+const {
+  handleConfirmSeat,
+  handleReservations,
+  handleUserInfo,
+  handleConfirmation,
+} = require("./handlers/userHandler");
 
 const PORT = process.env.PORT || 8000;
 
@@ -32,13 +38,19 @@ express()
   .use(express.urlencoded({ extended: false }))
 
   // endpoints
-  //.get("/flights/:flightNumber", asdasd)
 
   .get("/", handleHomepage)
 
   .get("/seat-select", handleSeats)
 
-  .get("/flights/:id", handleFlights)
+  .post("/users", handleConfirmSeat)
+  .get("/users", handleReservations)
+  .get("/users/:id", handleUserInfo)
+
+  .get("/view-reservation", handleConfirmation)
+
+  .get("/flights/:id", handleFlight)
+  .get("/flights", handleFlights)
 
   .get("*", handle404)
 

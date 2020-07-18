@@ -9,11 +9,15 @@
     <body>
         <div class='main'>
             <header class='header'>
-                <h1 class='header-logo'>Air Slingshot</h1>
+                <a href="http://localhost:8000/seat-select/"><h1 class='header-logo'></h1></a>
             </div>
             <div class="flight-select">
-                <label for="flight">Flight Number :</label>
-                <input name="flight" id="flight" class="flight" type="text" placeholder="flight #" />
+                <form>
+                    <label for="menu">Flight Number :</label>
+                    <select id="flight" name = "flight" class="flight">
+                        <option value="0">Pick your one way flight</option>
+                    </select>
+                 </form>
             </div>
             <div class="form-container">
                 <h2>Select your seat and Provide your information!</h2>
