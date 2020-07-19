@@ -30,7 +30,7 @@ const handleReservations = (req, res) => {
   res.status(200).json({ reservations });
 };
 
-const handleUserInfo = (req, res) => {
+const handleReservation = (req, res) => {
   const reservationId = req.params.id;
 
   const getReservationById = (id) => {
@@ -65,6 +65,6 @@ const handleConfirmation = (req, res) => {
 module.exports = {
   handleConfirmSeat,
   handleReservations,
-  handleUserInfo,
+  handleReservation,
   handleConfirmation,
 };

@@ -5,9 +5,7 @@ const confirmButton = document.getElementById("confirm-button");
 let selection = "";
 
 const renderFlights = (data) => {
-  const flightsIds = Object.keys(data);
-
-  flightsIds.forEach((flight) => {
+  data.forEach((flight) => {
     const option = document.createElement("option");
     option.innerText = flight;
     flightInput.appendChild(option);

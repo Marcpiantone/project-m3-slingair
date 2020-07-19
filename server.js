@@ -5,11 +5,16 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const { flights } = require("./test-data/flightSeating");
 const { handleSeats } = require("./handlers/seatsHandler");
-const { handleFlight, handleFlights } = require("./handlers/flightsHandler");
+const {
+  handleFlightLocal,
+  handleFlightsLocal,
+  handleFlightsAPI,
+  handleFlightAPI,
+} = require("./handlers/flightsHandler");
 const {
   handleConfirmSeat,
   handleReservations,
-  handleUserInfo,
+  handleReservation,
   handleConfirmation,
 } = require("./handlers/userHandler");
 
@@ -45,12 +50,12 @@ express()
 
   .post("/users", handleConfirmSeat)
   .get("/users", handleReservations)
-  .get("/users/:id", handleUserInfo)
+  .get("/users/:id", handleReservation)
 
   .get("/view-reservation", handleConfirmation)
 
-  .get("/flights/:id", handleFlight)
-  .get("/flights", handleFlights)
+  .get("/flights/:id", handleFlightAPI)
+  .get("/flights", handleFlightsAPI)
 
   .get("*", handle404)
 
