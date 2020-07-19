@@ -5,12 +5,11 @@ const handleFlight = (req, res) => {
   const id = req.params.id.toUpperCase();
 
   const getFlightById = (id) => {
-    for (let flight in flights) {
-      if (flight === id) return flights[flight];
-    }
+    return flights[id];
   };
+
   const flight = getFlightById(id);
-  console.log(flight);
+
   if (flight !== undefined) {
     res.status(200).send(flight);
   } else {

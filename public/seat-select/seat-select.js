@@ -95,8 +95,6 @@ const toggleFormContent = () => {
 const handleConfirmSeat = (event) => {
   event.preventDefault();
 
-  let reservationId = "";
-
   fetch("/users", {
     method: "POST",
     body: JSON.stringify({
@@ -112,8 +110,8 @@ const handleConfirmSeat = (event) => {
     },
   })
     .then((res) => res.json())
-    .then((data1) => {
-      reservationId = data1.data.id;
+    .then((data) => {
+      reservationId = data.data.id;
       window.location.assign(
         `http://localhost:8000/view-reservation?reservationId=${reservationId}`
       );
