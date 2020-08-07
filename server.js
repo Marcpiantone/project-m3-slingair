@@ -16,6 +16,7 @@ const {
   handleReservations,
   handleReservation,
   handleConfirmation,
+  handleUserReservations,
 } = require("./handlers/userHandler");
 
 const PORT = process.env.PORT || 8000;
@@ -52,7 +53,8 @@ express()
   .get("/users", handleReservations)
   .get("/users/:id", handleReservation)
 
-  .get("/view-reservation", handleConfirmation)
+  .get("/view-reservations", handleConfirmation)
+  .get("/view-reservations/:email", handleUserReservations)
 
   .get("/flights/:id", handleFlightAPI)
   .get("/flights", handleFlightsAPI)

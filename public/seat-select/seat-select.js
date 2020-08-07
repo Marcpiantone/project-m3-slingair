@@ -111,7 +111,7 @@ const handleConfirmSeat = (event) => {
     .then((data) => {
       reservationId = data.data.id;
       window.location.assign(
-        `http://localhost:8000/view-reservation?reservationId=${reservationId}`
+        `http://localhost:8000/view-reservations?reservationId=${reservationId}`
       );
     });
 };

@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0, minimal-ui" />
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <title>Confirmed!</title>
+</head>
+
+<body>
+    <div class='main'>
+        <header class='header'>
+            <a href="/seat-select/">
+                <h1 class='header-logo'></h1>
+            </a>
+    </div>
+    <div class="content">
+        <div class="confirmation">
+            <h3><%- `All of your flights with us...` %></h3>
+            <div class="user">
+                <% userReservations.forEach(reservation => { %>
+                    <ul class="user-info">
+                    <li> Flight #:<span><%-`${reservation.flight}` %></span> Seat:
+                    <span><%-`${reservation.seat}` %></span>
+                    </li>
+                    <li>Name: <span><%-`${reservation.givenName} ${reservation.surname}` %></span> </li>
+                    <li>Email: <span><%-`${reservation.email}` %></span> </li>
+                    <li class = "reservationId">Your reservation #: <span><%-`${reservation.id}` %></span> </li>
+                </ul>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+
+    <p class='footer-logo'>The only way to fly!</p>
+
+</body>
+
+</html>

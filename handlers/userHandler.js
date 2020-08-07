@@ -62,9 +62,31 @@ const handleConfirmation = (req, res) => {
   }
 };
 
+const handleUserReservations = (req, res) => {
+  const email = req.params.email;
+
+  const getReservationsByEmail = (email) => {
+    const userReservations = reservations.filter(
+      (reservation) => reservation.email === email
+    );
+    return userReservations;
+  };
+
+  const userReservations = getReservationsByEmail(email);
+
+  if (userReservations !== undefined) {
+    res
+      .status(200)
+      .render("./pages/view-reservations.ejs", { userReservations });
+  } else {
+    res.status(404).send("User not found, 404");
+  }
+};
+
 module.exports = {
   handleConfirmSeat,
   handleReservations,
   handleReservation,
   handleConfirmation,
+  handleUserReservations,
 };
